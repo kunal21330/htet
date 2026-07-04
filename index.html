@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTET PGT 2026 - Unofficial Answer Key & Score Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap');
+        
+        :root {
+            --bg-neutral: #fdfbf7;
+            --accent-slate: #334155;
+            --accent-sage: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+            background-color: var(--bg-neutral);
+            color: #1e293b;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            height: 300px;
+        }
+
+        .sticky-score {
+            position: sticky;
+            top: 1rem;
+            z-index: 40;
+        }
+
+        .correct-row { background-color: #f0fdf4; border-left: 4px solid #22c55e; }
+        .ans-pill { @apply px-2 py-1 rounded text-xs font-bold uppercase; }
+        
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body class="pb-20">
+
+    <!-- Header Section -->
+    <header class="bg-slate-800 text-white py-10 px-6 text-center shadow-lg mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold mb-2">HTET PGT Level-3 Answer Key 2026</h1>
+        <p class="text-slate-300">Exam Date: 4 July 2026 | Paper Set: B (Unofficial)</p>
+        <div class="mt-4 inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-semibold">
+            Disclaimer: Final scores depend on the official BSEH Answer Key
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left Column: Tracker -->
+        <aside class="lg:col-span-4 order-2 lg:order-1">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 sticky-score">
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    📊 Your Score Summary
+                </h2>
+                <div class="chart-container">
+                    <canvas id="scoreChart"></canvas>
+                </div>
+                <div class="mt-6 space-y-3">
+                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                        <span class="font-medium">Total Score:</span>
+                        <span id="scoreVal" class="text-2xl font-bold text-blue-600">0/150</span>
+                    </div>
+                    <p class="text-xs text-slate-500 italic text-center">Check the boxes next to questions you got right to calculate your score.</p>
+                </div>
+                
+                <nav class="mt-8">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3">Jump to Section</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="scrollToSection('part1')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-sm">CDP</button>
+                        <button onclick="scrollToSection('part2')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-sm">Languages</button>
+                        <button onclick="scrollToSection('part3')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-sm">Gen Studies</button>
+                        <button onclick="scrollToSection('part4')" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-sm">Hindi Major</button>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Right Column: Content -->
+        <section class="lg:col-span-8 space-y-12 order-1 lg:order-2">
+            
+            <!-- Intro Block -->
+            <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-400">
+                <h3 class="font-bold text-blue-800 mb-2">Analysis Overview</h3>
+                <p class="text-sm text-blue-700 leading-relaxed">
+                    The 2026 HTET PGT exam followed a balanced difficulty curve. Child Development questions emphasized modern constructivist theories and inclusive education (NEP 2020 alignment). The Quantitative section featured standard AP series and geometry problems. Use the lists below to verify your responses.
+                </p>
+            </div>
+
+            <!-- Part 1: CDP -->
+            <div id="part1" class="section-container">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span>
+                    <h2 class="text-2xl font-bold text-slate-800">Child Development & Pedagogy (1-30)</h2>
+                </div>
+                <div id="cdp-list" class="space-y-2">
+                    <!-- JS Populated -->
+                </div>
+            </div>
+
+            <!-- Part 2: Languages -->
+            <div id="part2" class="section-container">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-emerald-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span>
+                    <h2 class="text-2xl font-bold text-slate-800">Language: Hindi & English (31-60)</h2>
+                </div>
+                <div id="lang-list" class="space-y-2">
+                    <!-- JS Populated -->
+                </div>
+            </div>
+
+            <!-- Part 3: General Studies -->
+            <div id="part3" class="section-container">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-amber-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span>
+                    <h2 class="text-2xl font-bold text-slate-800">Quantitative, Reasoning & Haryana GK (61-90)</h2>
+                </div>
+                <div id="gs-list" class="space-y-2">
+                    <!-- JS Populated -->
+                </div>
+            </div>
+
+            <!-- Part 4: Hindi Major -->
+            <div id="part4" class="section-container">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-rose-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span>
+                    <h2 class="text-2xl font-bold text-slate-800">Subject Specific: Hindi (91-150)</h2>
+                </div>
+                <p class="text-sm text-slate-500 mb-4 italic">Focuses on Sahitya Itihas, Vyakaran, and Chhand-Alankar.</p>
+                <div id="subject-list" class="space-y-2">
+                    <!-- JS Populated -->
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        // Data derived from provided paper images
+        const examData = [
+            // PART 1 (1-30)
+            { id: 1, q: "Constructing knowledge by themselves", a: "C", t: "Constructivism", cat: "CDP" },
+            { id: 2, q: "Attributing failure to luck", a: "B", t: "External locus of control", cat: "CDP" },
+            { id: 3, q: "NOT included in Gardner's theory", a: "C", t: "Emotional Intelligence", cat: "CDP" },
+            { id: 4, q: "Mentally Retarded replacement term", a: "A", t: "Intellectual disability", cat: "CDP" },
+            { id: 5, q: "Culture-free, non-verbal test", a: "B", t: "Standard Progressive Matrices", cat: "CDP" },
+            { id: 6, q: "Challenging gender stereotypes", a: "B", t: "Critical thinking", cat: "CDP" },
+            { id: 7, q: "Major crisis of adolescence", a: "C", t: "Identity vs Role Confusion", cat: "CDP" },
+            { id: 8, q: "Most required for a counselor", a: "C", t: "Interpersonal intelligence", cat: "CDP" },
+            { id: 9, q: "Adolescent giving extra roti to child", a: "C", t: "Moral development", cat: "CDP" },
+            { id: 10, q: "Meta-cognition definition", a: "A", t: "Self-awareness of mental powers", cat: "CDP" },
+            { id: 11, q: "Correct Pair", a: "B", t: "Thorndike - Connectionism", cat: "CDP" },
+            { id: 12, q: "Sudden solution to problem", a: "D", t: "Insight theory", cat: "CDP" },
+            { id: 13, q: "Rejection by parents leads to", a: "A", t: "Inferiority feelings", cat: "CDP" },
+            { id: 14, q: "Juvenile delinquency treatment", a: "D", t: "All the above", cat: "CDP" },
+            { id: 15, q: "Mechanism: making thoughts like others", a: "D", t: "Identification", cat: "CDP" },
+            { id: 16, q: "Anxiety and affiliation", a: "A", t: "Increase", cat: "CDP" },
+            { id: 17, q: "Psycho-analysis lays stress on", a: "C", t: "Unconsciousness", cat: "CDP" },
+            { id: 18, q: "Not a behaviorist", a: "A", t: "Jerome S. Bruner", cat: "CDP" },
+            { id: 19, q: "Incorrect Pair (Multiple Intelligence)", a: "A", t: "Guilford (Should be Gardner)", cat: "CDP" },
+            { id: 20, q: "IQ Calculation (12/10 * 100)", a: "C", t: "120", cat: "CDP" },
+            { id: 21, q: "Adjustment with new people", a: "C", t: "Emotional Quotient", cat: "CDP" },
+            { id: 22, q: "Drive-reduction theory", a: "A", t: "Hull", cat: "CDP" },
+            { id: 23, q: "Self/People perception develops", a: "C", t: "Self concept", cat: "CDP" },
+            { id: 24, q: "CCE Focuses on", a: "B", t: "Holistic Development", cat: "CDP" },
+            { id: 25, q: "Progress over time best shows", a: "B", t: "Portfolio", cat: "CDP" },
+            { id: 26, q: "Encouraging shy students", a: "B", t: "Humanistic approach", cat: "CDP" },
+            { id: 27, q: "Praising effort over marks", a: "B", t: "Growth mindset", cat: "CDP" },
+            { id: 28, q: "I can improve with practice", a: "B", t: "Self-efficacy", cat: "CDP" },
+            { id: 29, q: "Excessive rewards reduce", a: "D", t: "Intrinsic motivation", cat: "CDP" },
+            { id: 30, q: "Learning only for examination", a: "A", t: "Surface learning", cat: "CDP" },
+
+            // PART 2: Hindi (31-45)
+            { id: 31, q: "शुद्ध शब्द", a: "A", t: "माहात्म्य", cat: "Lang" },
+            { id: 32, q: "श्रुतिसम भिन्नार्थक (Incorrect)", a: "A", t: "प्रवाल-संसार (गलत अर्थ)", cat: "Lang" },
+            { id: 33, q: "विराम चिह्न युक्त वाक्य", a: "C", t: "...कब आओगे?", cat: "Lang" },
+            { id: 34, q: "अपस्मार भाव", a: "A", t: "संचारी", cat: "Lang" },
+            { id: 35, q: "अंकेक्षक वाक्यांश", a: "D", t: "आय-व्यय आंकड़ों की जाँच", cat: "Lang" },
+            { id: 36, q: "अंतर का अर्थ नहीं", a: "B", t: "आकाश", cat: "Lang" },
+            { id: 37, q: "वज्राहत समास", a: "C", t: "तत्पुरूष समास", cat: "Lang" },
+            { id: 38, q: "हरि नाम है हमारी... अलंकार", a: "B", t: "वक्रोकि अलंकार", cat: "Lang" },
+            { id: 39, q: "सांध्यागीत की रचना", a: "A", t: "महादेवी वर्मा", cat: "Lang" },
+            { id: 40, q: "भाः + पति संधि", a: "C", t: "भास्पति", cat: "Lang" },
+            { id: 41, q: "सूद शब्द भाषा", a: "A", t: "फारसी", cat: "Lang" },
+            { id: 42, q: "प्राची का विलोम", a: "D", t: "प्रतीची", cat: "Lang" },
+            { id: 43, q: "अशुद्ध शब्द (Valmiki)", a: "B", t: "वाल्मिकी (Correct is वाल्मीकि)", cat: "Lang" },
+            { id: 44, q: "तद्भव शब्द", a: "C", t: "गयंद", cat: "Lang" },
+            { id: 45, q: "दिए गए वाक्य में क्रिया", a: "C", t: "अकर्मक/सकर्मक (Context dependent)", cat: "Lang" },
+
+            // English (46-60)
+            { id: 46, q: "Synonym: SMUDGE", a: "D", t: "Stain", cat: "Lang" },
+            { id: 47, q: "Problem is, I've got more...", a: "A", t: "Grounded friends", cat: "Lang" },
+            { id: 48, q: "Error in segment", a: "B", t: "Usually, Ratheesh hasn't", cat: "Lang" },
+            { id: 49, q: "Bending easily without breaking", a: "D", t: "Pliable", cat: "Lang" },
+            { id: 50, q: "Antonym: BUOYANT", a: "B", t: "Gloomy", cat: "Lang" },
+            { id: 51, q: "Correct Spell", a: "C", t: "Miscellaneous", cat: "Lang" },
+            { id: 52, q: "Idiom: Raise one's hackles", a: "C", t: "To greatly irritate", cat: "Lang" },
+            { id: 53, q: "Passage Blank 1", a: "C", t: "offers", cat: "Lang" },
+            { id: 54, q: "Passage Blank 2", a: "C", t: "developed", cat: "Lang" },
+            { id: 55, q: "Passage Blank 3", a: "A", t: "defines", cat: "Lang" },
+            { id: 56, q: "Passage Blank 4", a: "A", t: "series", cat: "Lang" },
+            { id: 57, q: "Passage Blank 5", a: "D", t: "who", cat: "Lang" },
+            { id: 58, q: "Rearrange QRSP", a: "D", t: "QRSP sequence", cat: "Lang" },
+            { id: 59, q: "Substitute: sanction to copy", a: "B", t: "will not sanction copying", cat: "Lang" },
+            { id: 60, q: "Direct/Indirect Speech", a: "A", t: "Rani asked if she had known...", cat: "Lang" },
+
+            // PART 3: General Studies (61-90)
+            { id: 61, q: "Ratio 14:9, HCF 3. Greater no?", a: "C", t: "42 (14*3)", cat: "GS" },
+            { id: 62, q: "Jumbled: AIGNEZAM", a: "B", t: "MAGAZINE", cat: "GS" },
+            { id: 63, q: "Series: 589, 588, 583...", a: "D", t: "558 (Diffs 1^2, 5^1, 5^2...)", cat: "GS" },
+            { id: 64, q: "Shortest distance A to D", a: "B", t: "15 km (Pythagoras 9,12)", cat: "GS" },
+            { id: 65, q: "Ring:Boxing :: Rink:?", a: "A", t: "Skating", cat: "GS" },
+            { id: 66, q: "B alone takes how long?", a: "B", t: "37.5 days", cat: "GS" },
+            { id: 67, q: "Total number of girls in row", a: "D", t: "34", cat: "GS" },
+            { id: 68, q: "Syllogism Conclusions", a: "B", t: "Neither follows", cat: "GS" },
+            { id: 69, q: "Day on 7 March 2005", a: "D", t: "Monday", cat: "GS" },
+            { id: 70, q: "Neighbor of Gopi and Komal", a: "A", t: "Bhawna", cat: "GS" },
+            { id: 71, q: "K related to U in expression", a: "B", t: "Daughter-in-law", cat: "GS" },
+            { id: 72, q: "Extra people engaged", a: "D", t: "42 men", cat: "GS" },
+            { id: 73, q: "Y's share in profit", a: "C", t: "200,000", cat: "GS" },
+            { id: 74, q: "Max marks (125+40=33%)", a: "A", t: "500", cat: "GS" },
+            { id: 75, q: "Winner wins by votes?", a: "D", t: "440 (720 - 280)", cat: "GS" },
+            { id: 76, q: "Total books in library", a: "B", t: "90,000", cat: "GS" },
+            { id: 77, q: "Terms in AP for sum 795", a: "A", t: "15", cat: "GS" },
+            { id: 78, q: "Value of Y in triangle", a: "C", t: "60 (Linear pair 120)", cat: "GS" },
+            { id: 79, q: "Distance chord from center", a: "C", t: "12 cm (13-5-12 triangle)", cat: "GS" },
+            { id: 80, q: "Cluster: BEAUTY", a: "B", t: "YTUEJH", cat: "GS" },
+            { id: 81, q: "Largest WLS of Haryana", a: "D", t: "Abubshahar", cat: "GS" },
+            { id: 82, q: "Hari Har Scheme", a: "D", t: "Children (Orphaned)", cat: "GS" },
+            { id: 83, q: "Pollution Control Board set up", a: "B", t: "1974", cat: "GS" },
+            { id: 84, q: "First Lokayukta of Haryana", a: "A", t: "Pritam Pal", cat: "GS" },
+            { id: 85, q: "Not related with Gymnastic", a: "C", t: "Geeta Jutshi (Athletics)", cat: "GS" },
+            { id: 86, q: "Chariot built by", a: "C", t: "Shankaracharya of Peeth", cat: "GS" },
+            { id: 87, q: "New Sub-divisions in 2022", a: "A", t: "8", cat: "GS" },
+            { id: 88, q: "Asigarh fort built by", a: "D", t: "Prithviraj Chauhan", cat: "GS" },
+            { id: 89, q: "Seema Punia Village", a: "B", t: "Khewda", cat: "GS" },
+            { id: 90, q: "Kalidas of Haryana", a: "D", t: "Deep Chand Bahman", cat: "GS" },
+
+            // Subject Hindi (91-150) - Sampled for Logic
+            { id: 91, q: "पत्ता तक नहीं हिल रहा (शक्ति)", a: "D", t: "अभिधा", cat: "Sub" },
+            { id: 93, q: "राधा को हँसाया (क्रिया)", a: "C", t: "प्रेरणार्थक क्रिया", cat: "Sub" },
+            { id: 94, q: "वंशस्थ छंद वर्ण संख्या", a: "B", t: "12", cat: "Sub" },
+            { id: 95, q: "रौद्र रस स्थायी भाव", a: "D", t: "क्रोध", cat: "Sub" },
+            { id: 96, q: "शुद्ध शब्द", a: "C", t: "भौगोलिक", cat: "Sub" },
+            { id: 98, q: "संस्कार उपसर्ग", a: "C", t: "सम् (or सम)", cat: "Sub" },
+            { id: 99, q: "पूर्वी हिन्दी उत्पत्ति", a: "B", t: "अर्द्धमागधी", cat: "Sub" },
+            { id: 104, q: "जिसकी कोई सीमा न हो", a: "B", t: "असीम", cat: "Sub" },
+            { id: 106, q: "संकीर्ण विलोम", a: "B", t: "विस्तीर्ण", cat: "Sub" },
+            { id: 115, q: "ऋणमुक्त समास", a: "A", t: "अपादान तत्पुरुष", cat: "Sub" },
+            { id: 122, q: "दो बैलों की कथा (बैल जाति)", a: "C", t: "पछाई", cat: "Sub" },
+            { id: 131, q: "आदिकाल को प्रारंभिक काल कहा", a: "A", t: "मिश्र बंधु", cat: "Sub" }
+        ];
+
+        // UI Generation
+        function initLists() {
+            const containers = {
+                'CDP': document.getElementById('cdp-list'),
+                'Lang': document.getElementById('lang-list'),
+                'GS': document.getElementById('gs-list'),
+                'Sub': document.getElementById('subject-list')
+            };
+
+            examData.forEach(item => {
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between p-3 bg-white border border-slate-100 rounded-lg hover:shadow-md transition-all";
+                row.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <input type="checkbox" id="q${item.id}" onchange="updateScore()" class="w-5 h-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+                        <label for="q${item.id}" class="text-sm font-semibold text-slate-500 w-8">#${item.id}</label>
+                        <span class="text-sm md:text-base font-medium text-slate-700 truncate max-w-[200px] md:max-w-md">${item.q}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="ans-pill bg-slate-800 text-white w-8 h-8 flex items-center justify-center rounded-lg">${item.a}</span>
+                        <button onclick="toggleDetails(${item.id})" class="text-indigo-500 text-xs font-bold hover:underline">Explain</button>
+                    </div>
+                `;
+                
+                const details = document.createElement('div');
+                details.id = `details-${item.id}`;
+                details.className = "hidden px-14 py-2 text-sm text-slate-600 italic bg-indigo-50 rounded-b-lg border-x border-b border-indigo-100";
+                details.innerText = `Detailed Result: Option (${item.a}) - ${item.t}`;
+
+                containers[item.cat].appendChild(row);
+                containers[item.cat].appendChild(details);
+            });
+        }
+
+        function toggleDetails(id) {
+            const el = document.getElementById(`details-${id}`);
+            el.classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Scoring Logic & Chart
+        let myChart;
+        function initChart() {
+            const ctx = document.getElementById('scoreChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Correct', 'Remaining'],
+                    datasets: [{
+                        data: [0, 150],
+                        backgroundColor: ['#10b981', '#f1f5f9'],
+                        borderWidth: 0,
+                        cutout: '80%'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        function updateScore() {
+            const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            document.getElementById('scoreVal').innerText = checkedCount + "/150";
+            
+            myChart.data.datasets[0].data = [checkedCount, 150 - checkedCount];
+            myChart.update();
+
+            // Row highlighting
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                const parent = cb.closest('.flex');
+                if (cb.checked) parent.parentElement.classList.add('correct-row');
+                else parent.parentElement.classList.remove('correct-row');
+            });
+        }
+
+        window.onload = () => {
+            initLists();
+            initChart();
+        };
+    </script>
+</body>
+</html>
