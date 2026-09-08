@@ -1,620 +1,1200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-  <title>Sorry Note for slayer 😭💻❤️</title>
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Little Apology for Shubhi ♡</title>
+
   <style>
-    /* ---- Reset & Globals ---- */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html, body { width:100%; height:100%; overflow:hidden; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --pink: #f29ab8;
+      --pink-light: #ffd5e2;
+      --text: #f9edf3;
+      --muted: #cbb8c3;
+      --border: rgba(255, 255, 255, 0.12);
+      --card: rgba(255, 255, 255, 0.07);
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      font-family:
+        "Segoe UI",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
+
+      color: var(--text);
+
       background:
-      radial-gradient(circle at 20% 15%, rgba(255, 182, 213, .18), transparent 28%),
-      radial-gradient(circle at 85% 80%, rgba(188, 164, 255, .16), transparent 30%),
-      linear-gradient(135deg, #120f20, #21152e 48%, #10182d);
-      color: #fff;
-      text-shadow: 0 2px 8px rgba(0,0,0,.45);
-      -webkit-font-smoothing: antialiased;
-      position: relative;
-      overflow: hidden;
-    }
+        radial-gradient(
+          circle at 15% 15%,
+          rgba(242, 154, 184, 0.18),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 85% 85%,
+          rgba(160, 130, 220, 0.14),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          #120e17,
+          #211522 50%,
+          #10151f
+        );
 
-    /* Floating hearts background */
-    .hearts-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -1;
-    }
-    
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff3366"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
-      background-size: contain;
-      opacity: 0.3;
-    }
-
-    /* ---- Overlay & Love Button ---- */
-    .overlay {
-      position: fixed; 
-      inset:0;
-      background:
-      radial-gradient(circle at center, rgba(82, 42, 91, .28), transparent 45%),
-      rgba(7, 5, 14, .94);
-      backdrop-filter: blur(14px); 
-      z-index:1000;
-      display:flex; 
-      flex-direction:column;
-      justify-content:center; 
-      align-items:center;
-      transition: opacity 1s ease;
-    }
-    
-    .loading-message {
-      font-size: 1.5rem; 
-      text-align:center; 
-      margin-bottom:30px;
-      color: #ffe3f2;
-      letter-spacing: .2px;
-      animation: pulseText 2s infinite;
-      text-shadow: 0 0 22px rgba(255, 151, 201, .25);
-    }
-    
-    @keyframes pulseText {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    .blocklove { 
-      display:flex; 
-      flex-direction:column; 
-      align-items:center; 
-    }
-    
-    .lovein {
-      background: radial-gradient(circle at 35% 30%, #ff91c3, #b82f78 48%, #4b1638);
-      color:#fff;
-      width:80px; 
-      height:80px; 
-      border-radius:50%;
-      font-size:36px; 
-      display:flex;
-      justify-content:center; 
-      align-items:center;
-      cursor:pointer; 
-      animation: pulse 1.5s infinite, float 3s ease-in-out infinite;
-      box-shadow:
-        0 0 24px rgba(255, 117, 184, .55),
-        0 0 70px rgba(255, 76, 160, .22),
-        inset 0 0 18px rgba(255,255,255,.12);
-      border: 2px solid rgba(255, 255, 255, 0.5);
-      transition: transform 0.3s ease;
-    }
-    
-    .lovein:hover {
-      transform: scale(1.1);
-    }
-    
-    @keyframes pulse {
-      0%,100%{ transform:scale(1); }
-      50%{ transform:scale(1.1); }
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-    
-    .overlay-text {
-      margin-top:15px; 
-      font-size:1.2rem;
-      color: #ffccf9;
-    }
-
-    /* ---- Swiper ---- */
-    .swiper { 
-      width:100%; 
-      height:100%; 
-    }
-    
-    .swiper-slide {
-      display:flex; 
-      flex-direction:column;
-      justify-content:center; 
-      align-items:center;
-      text-align:center; 
-      padding:0 20px;
-      position: relative;
-    }
-    
-    .stiker {
-      width:120px; 
-      height:120px; 
-      margin-bottom:30px;
-      background:rgba(255,255,255,0.85);
-      border-radius:50%; 
-      overflow:hidden;
-      transform:scale(0); 
-      opacity:0;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border: 3px solid rgba(255, 255, 255, 0.78);
-      box-shadow:
-        0 14px 35px rgba(0,0,0,.32),
-        0 0 28px rgba(255, 147, 197, .18);
-      animation: float 4s ease-in-out infinite;
-    }
-    
-    .stiker.scale1 { 
-      animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-    }
-    
-    @keyframes bounceIn {
-      0% { transform: scale(0); opacity: 0; }
-      60% { transform: scale(1.1); opacity: 1; }
-      80% { transform: scale(0.95); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    
-    .stiker img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    h1, p {
-      transform:translateY(30px); 
-      opacity:0;
-      margin:0 40px;
-      font-size: clamp(1.15rem, 2.2vw, 1.55rem);
-      line-height:1.65;
-      font-weight: 500;
-      letter-spacing: .1px;
-      max-width: 800px;
-      padding: 20px;
-      border-radius: 20px;
-      background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.055));
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow:
-        0 18px 55px rgba(0,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.13);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-    }
-    
-    h1.scale1, p.scale1 {
-      animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    
-    @keyframes fadeInUp {
-      0% { transform:translateY(30px); opacity:0; }
-      100% { transform:translateY(0); opacity:1; }
-    }
-    
-    #scroll-container { 
-      max-height:60vh; 
-      overflow:auto; 
-      text-align:left;
-      width: 90%;
-      max-width: 600px;
-      padding: 10px;
-    }
-    
-    /* Custom scrollbar */
-    #scroll-container::-webkit-scrollbar {
-      width: 8px;
-    }
-    
-    #scroll-container::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.1);
-      border-radius: 10px;
-    }
-    
-    #scroll-container::-webkit-scrollbar-thumb {
-      background: linear-gradient(#ff3366, #ff0033);
-      border-radius: 10px;
-    }
-    
-    .swiper-pagination-bullet { 
-      background: rgba(255,255,255,0.5); 
-      opacity: 0.7;
-      width: 12px;
-      height: 12px;
-    }
-    
-    .swiper-pagination-bullet-active { 
-      background: #a7435c !important; 
-      opacity: 1;
-      box-shadow: 0 0 10px rgba(255, 51, 102, 0.8);
-      transform: scale(1.2);
-    }
-    
-    /* Typing animation */
-    .typing-container {
-      min-height: 200px;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 100%;
+
+      padding: 20px;
+      overflow-x: hidden;
     }
-    
-    #typing-text {
+
+    /* --------------------------------
+       BACKGROUND DECORATIONS
+    -------------------------------- */
+
+    .background-heart {
+      position: fixed;
+      pointer-events: none;
+      opacity: 0;
+      font-size: 18px;
+      animation: floatHeart linear forwards;
+      z-index: 0;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(20px) scale(0.5) rotate(0deg);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 0.55;
+      }
+
+      100% {
+        transform:
+          translateY(-110vh)
+          translateX(40px)
+          scale(1.2)
+          rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    /* --------------------------------
+       MAIN STORY
+    -------------------------------- */
+
+    .story {
+      position: relative;
+      z-index: 2;
+
+      width: min(720px, 100%);
+      min-height: 650px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 35px 25px;
+
+      border-radius: 30px;
+
+      border: 1px solid var(--border);
+
+      background:
+        radial-gradient(
+          circle at 20% 15%,
+          rgba(255, 180, 205, 0.08),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.06),
+          rgba(255,255,255,0.025)
+        );
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+
+      overflow: hidden;
+    }
+
+    .screen {
+      width: min(590px, 100%);
       text-align: center;
-      min-height: 200px;
+
+      animation: screenIn 0.55s ease both;
     }
-    
+
+    @keyframes screenIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* --------------------------------
+       TEXT
+    -------------------------------- */
+
+    .eyebrow {
+      color: #d9c6d0;
+
+      font-size: 0.75rem;
+      letter-spacing: 0.17em;
+
+      text-transform: uppercase;
+
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 8vw, 4rem);
+      line-height: 1.02;
+
+      letter-spacing: -0.05em;
+
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 7vw, 3.25rem);
+      line-height: 1.05;
+
+      letter-spacing: -0.045em;
+
+      margin-bottom: 18px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+
+      font-size: 1rem;
+      line-height: 1.7;
+
+      max-width: 500px;
+
+      margin: 0 auto 28px;
+    }
+
+    /* --------------------------------
+       HEART BUTTON
+    -------------------------------- */
+
+    .heart-button {
+      width: 96px;
+      height: 96px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(255,255,255,0.3);
+
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          #ffb4d0,
+          #d96f9b 50%,
+          #7b3155
+        );
+
+      color: white;
+
+      font-size: 42px;
+
+      cursor: pointer;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      box-shadow:
+        0 15px 40px rgba(242,154,184,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .heart-button:hover {
+      transform: scale(1.06) translateY(-3px);
+
+      box-shadow:
+        0 20px 50px rgba(242,154,184,0.42),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+
+    .heart-button:active {
+      transform: scale(0.94);
+    }
+
+    .tap-text {
+      margin-top: 13px;
+
+      color: #dcbfca;
+
+      font-size: 0.82rem;
+    }
+
+    /* --------------------------------
+       PROGRESS
+    -------------------------------- */
+
+    .progress {
+      display: flex;
+      justify-content: center;
+
+      gap: 6px;
+
+      margin-bottom: 26px;
+    }
+
+    .progress-dot {
+      width: 20px;
+      height: 5px;
+
+      border-radius: 999px;
+
+      background: rgba(255,255,255,0.13);
+
+      transition: 0.3s ease;
+    }
+
+    .progress-dot.active {
+      width: 30px;
+      background: var(--pink);
+    }
+
+    /* --------------------------------
+       EMOJI
+    -------------------------------- */
+
+    .big-emoji {
+      font-size: 3.2rem;
+
+      margin-bottom: 14px;
+
+      animation: gentleFloat 2.5s ease-in-out infinite;
+    }
+
+    @keyframes gentleFloat {
+      50% {
+        transform: translateY(-7px) rotate(-2deg);
+      }
+    }
+
+    /* --------------------------------
+       CARDS
+    -------------------------------- */
+
+    .card {
+      padding: 25px;
+
+      border-radius: 22px;
+
+      border: 1px solid var(--border);
+
+      background: var(--card);
+
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .card p {
+      color: #eadde4;
+
+      font-size: 1rem;
+
+      line-height: 1.75;
+
+      margin-bottom: 16px;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .quote {
+      border-left: 3px solid var(--pink);
+
+      padding-left: 15px;
+
+      color: #f6dce6 !important;
+
+      font-style: italic;
+    }
+
+    /* --------------------------------
+       BUTTONS
+    -------------------------------- */
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      margin-top: 25px;
+    }
+
+    .button {
+      min-height: 46px;
+
+      padding: 12px 20px;
+
+      border-radius: 999px;
+
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,0.07);
+
+      color: var(--text);
+
+      font: inherit;
+
+      cursor: pointer;
+
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      background: rgba(255,255,255,0.12);
+
+      transform: translateY(-2px);
+    }
+
+    .button.primary {
+      background: var(--pink);
+
+      color: #29151e;
+
+      border-color: transparent;
+
+      font-weight: 700;
+    }
+
+    .button:active {
+      transform: scale(0.97);
+    }
+
+    /* --------------------------------
+       TYPING TEXT
+    -------------------------------- */
+
+    .typing {
+      min-height: 260px;
+
+      text-align: left;
+
+      white-space: pre-wrap;
+
+      color: #eadde4;
+
+      line-height: 1.75;
+
+      font-size: 0.98rem;
+    }
+
     .cursor {
       display: inline-block;
-      width: 8px;
-      height: 1.5rem;
-      background-color: #ff3366;
-      margin-left: 4px;
+
+      width: 6px;
+      height: 1.05em;
+
+      margin-left: 3px;
+
+      vertical-align: -2px;
+
+      background: var(--pink);
+
+      border-radius: 2px;
+
       animation: blink 1s infinite;
-      vertical-align: middle;
     }
-    
+
     @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-    
-
-    .tiny-label {
-      margin-bottom: 14px;
-      padding: 7px 13px;
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 999px;
-      background: rgba(255,255,255,.07);
-      color: rgba(255,225,239,.82);
-      font-size: .78rem;
-      letter-spacing: 1.2px;
-      text-transform: lowercase;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
-    }
-
-    .swiper-pagination {
-      bottom: 18px !important;
-    }
-
-    .swiper-pagination-bullet {
-      transition: all .35s ease;
-    }
-
-    .swiper-pagination-bullet-active {
-      width: 28px;
-      border-radius: 999px;
-    }
-
-    #scroll-container {
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255, 130, 181, .55) transparent;
-    }
-
-    #typing-text {
-      padding: 4px 2px 22px;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .cursor {
-      border-radius: 3px;
-      box-shadow: 0 0 10px rgba(255, 76, 160, .65);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
+      50% {
+        opacity: 0;
       }
     }
 
-    /* Responsive design */
-    @media (max-width: 768px) {
-      h1, p {
-        font-size: 1.3rem;
-        margin: 0 20px;
-      }
-      
-      .stiker {
-        width: 100px;
-        height: 100px;
-      }
-      
-      .lovein {
-        width: 70px;
-        height: 70px;
-      }
+    /* --------------------------------
+       FINAL
+    -------------------------------- */
+
+    .final-heart {
+      font-size: 4rem;
+
+      margin-bottom: 15px;
+
+      animation: finalFloat 2s ease-in-out infinite;
     }
-    
-    @media (max-width: 480px) {
-      h1, p {
-        font-size: 1.1rem;
-        padding: 15px;
-      }
-      
-      .loading-message {
-        font-size: 1.2rem;
-      }
-      
-      .overlay-text {
-        font-size: 1rem;
+
+    @keyframes finalFloat {
+      50% {
+        transform: translateY(-8px) rotate(-4deg);
       }
     }
 
-    /* container covers whole screen, pointer‑events none so clicks still work */
-#rising-hearts {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1;
-}
+    .signature {
+      margin-top: 18px;
 
-.r-heart {
-  position: absolute;
-  bottom: -50px;
-  width: 24px;
-  height: 24px;
-  background: url('data:image/svg+xml;utf8,\
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff6699">\
-<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5\
-c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09\
-C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5\
-c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>\
-</svg>');
-  background-size: contain;
-  opacity: 0.8;
-  animation: rise 4s ease-out forwards, sway 2s ease-in-out infinite alternate;
-}
+      color: #f2c9d8;
 
-@keyframes rise {
-  0%   { transform: translateY(0) scale(0.5); opacity: 0; }
-  20%  { opacity: 1; }
-  100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
-}
+      font-size: 0.9rem;
+    }
 
-@keyframes sway {
-  0%   { transform: translateX(0) ; }
-  100% { transform: translateX(20px); }
-}
+    /* --------------------------------
+       MOBILE
+    -------------------------------- */
+
+    @media (max-width: 600px) {
+
+      body {
+        padding: 10px;
+      }
+
+      .story {
+        min-height: 620px;
+
+        padding: 30px 17px;
+
+        border-radius: 24px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .card p {
+        font-size: 0.95rem;
+      }
+
+      .typing {
+        font-size: 0.94rem;
+      }
+
+      .heart-button {
+        width: 86px;
+        height: 86px;
+      }
+    }
 
   </style>
 </head>
+
 <body>
 
-  <!-- Heart animation container -->
-<div id="rising-hearts"></div>
+  <!-- ==========================================
+       STORY CONTAINER
+  =========================================== -->
 
-  <!-- Floating hearts background -->
-  <div class="hearts-container" id="hearts"></div>
-  
-  <!-- Overlay -->
-  <div class="overlay">
-    <div class="loading-message">Hey slayer!<br>I’m truly sorry…</div>
-    <div class="blocklove" id="intro">
-      <div class="lovein" id="loveBtn" role="button" tabindex="0" aria-label="Open apology">❤️‍🩹</div>
-      <div class="overlay-text">Click to see my apology</div>
-    </div>
-  </div>
+  <main class="story">
 
-  <!-- Swiper -->
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="tiny-label">a little note for you ♡</div>
-        <div class="stiker" id="stiker1">
-          <img src="https://i.pinimg.com/originals/cc/5e/2b/cc5e2bb13bf57e4f0fbb0db6ca45cb96.gif" alt="Cute Sticker" width="120" height="120"/>
-        </div>
-        <h1 id="teks1">I’m Really Sorry, yaar 🥺💗<br><span style="font-size:.72em;opacity:.82;font-weight:400;">I need to tell you something...</span></h1>
-      </div>
-      <div class="swiper-slide">
-        <div class="stiker" id="stiker2">
-          <img src="https://i.pinimg.com/originals/c0/bd/a0/c0bda0957197caa4c6724bf58864d6f2.gif" alt="Love Sticker" width="120" height="120"/>
-        </div>
-        <div class="typing-container">
-          <div id="scroll-container">
-            <div id="typing-text"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="swiper-pagination"></div>
-  </div>
+    <div id="screen" class="screen"></div>
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  </main>
+
+
   <script>
-    // Create floating hearts
-    function createHearts() {
-      const container = document.getElementById('hearts');
-      const heartCount = 20;
-      
-      for (let i = 0; i < heartCount; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        
-        // Random position
-        const posX = Math.random() * 100;
-        const posY = Math.random() * 100;
-        const size = Math.random() * 10 + 5;
-        const duration = Math.random() * 10 + 10;
-        const delay = Math.random() * 5;
-        
-        heart.style.left = `${posX}%`;
-        heart.style.top = `${posY}%`;
-        heart.style.width = `${size}px`;
-        heart.style.height = `${size}px`;
-        heart.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
-        
-        container.appendChild(heart);
-      }
-    }
-    
-    // Custom typing effect
-    function typeText(element, text, speed, callback) {
-      let i = 0;
-      const cursor = document.createElement('span');
-      cursor.className = 'cursor';
-      element.innerHTML = '';
-      element.appendChild(cursor);
-      
-      function type() {
-        if (i < text.length) {
-          const char = document.createTextNode(text.charAt(i));
-          element.insertBefore(char, cursor);
-          i++;
-          setTimeout(type, speed);
-        } else {
-          if (callback) callback();
-        }
-      }
-      
-      type();
-    }
-    
-    // Text for the second slide
-   const messageText = `Shubhi, I’m genuinely really sorry yaar 🥺❤️
 
-I swear I didn’t mean that message for you at all. Telegram was sitting in that tiny floating window while I was talking to my cousin on Instagram, and with the show running in the background, I just glanced at the messages and somehow my brain decided that those messages were from Bipin 😭
+    /* ==========================================
+       STORY DATA
+    =========================================== */
+
+    const apology = `Shubhi, I’m genuinely really sorry yaar 🥺❤️
+
+I swear I didn’t mean that message for you at all.
+
+Telegram was sitting in that tiny floating window while I was talking to my cousin on Instagram, and with the show running in the background, I just glanced at the messages and somehow my brain decided those messages were from Bipin 😭
 
 And then I casually replied with my “easy dude” wala tone without even realising that you had written it. 🫠
-The moment you asked me “ye kya tha group pe?” I was like… oh no. I’ve messed up. 😭
 
-Please don’t think for even a second that I was trying to be disrespectful to you or talk to you in some weird tone. I’d never intentionally do that, especially after all the conversations we’ve had these past few days. 🥺
+The moment you asked me “ye kya tha group pe?” I was like…
 
-And honestly, I feel even worse because I know you were already being yourself with me and trusting me enough to let me know the real Shubhi behind “Slayer” 😭. 
+oh no.
 
-So yes… officially, sincerely, wholeheartedly SORRY. 🥹🤍
+I’ve messed up. 😭
+
+Please don’t think for even a second that I was trying to be disrespectful to you.
+
+I’d never intentionally do that, especially after all the conversations we’ve had these past few days. 🥺
+
+And honestly, I feel even worse because you trusted me enough to let me know the real Shubhi behind “Slayer” 😭😂.
+
+The last thing I want is for one stupid misunderstanding and one badly-timed “easy dude” to make you feel like I don’t respect you.
+
+So yes…
+
+officially, sincerely, wholeheartedly…
+
+SORRY. 🥹🤍
+
 My brain was buffering, my Telegram was tiny, and my timing was absolutely terrible. 😭
 
 Please forgive this idiot? 🥺
-I promise next time I’ll read the name before replying, not just the message. 
 
-And please don’t become all quiet and distant with me now… I actually really like talking to you, and I’d hate for our stupid little four-day friendship to get ruined because of something this silly. 🫶🏻
+I promise next time I’ll read the name before replying, not just the message. 😂
 
-I’m sorry, Shubhi. Really. 🤍
+And please don’t become all quiet and distant with me now…
+
+I actually really like talking to you, and I’d hate for our stupid little four-day friendship to get ruined because of something this silly. 🫶🏻
+
+I’m sorry, Shubhi.
+
+Really. 🤍`;
 
 
-    // Initialize when page loads
-    window.addEventListener('load', () => {
-      createHearts();
-      
-      // Fade in the love button after a short delay
-      setTimeout(() => {
-        document.querySelector('.loading-message').style.display = 'none';
-        document.getElementById('intro').style.display = 'flex';
-      }, 1500);
-    });
+    /* ==========================================
+       STATE
+    =========================================== */
 
-    // Init Swiper
-    const swiper = new Swiper('.mySwiper', {
-      allowTouchMove: false,
-      pagination: { 
-        el: '.swiper-pagination',
-        clickable: true
+    const screen = document.getElementById("screen");
+
+    let currentStep = 0;
+
+    let typingTimer = null;
+
+
+    /* ==========================================
+       PROGRESS DOTS
+    =========================================== */
+
+    function progressDots() {
+
+      let html = "";
+
+      for (let i = 1; i <= 6; i++) {
+
+        html += `
+          <span
+            class="progress-dot ${i === currentStep ? "active" : ""}">
+          </span>
+        `;
+
       }
-    });
 
-    // Helper to reveal elements
-    function reveal(id) {
-      document.getElementById(id).classList.add('scale1');
+      return `<div class="progress">${html}</div>`;
     }
 
-    // LOVE button click
-    document.getElementById('loveBtn').addEventListener('click', () => {
-      // Animate the overlay out
-      document.querySelector('.overlay').style.opacity = '0';
-      
-      setTimeout(() => {
-        document.querySelector('.overlay').style.display = 'none';
-      }, 1000);
-      
-      // Animate the heart button
-      document.getElementById('loveBtn').style.animation = 'pulse 0.5s ease forwards';
-      
-      // Reveal first slide with delays
-      setTimeout(() => {
-        reveal('stiker1');
-      }, 500);
-      
-      setTimeout(() => {
-        reveal('teks1');
-      }, 1000);
-      
-      // Move to second slide after delay
-      setTimeout(() => {
-        swiper.slideNext();
-        
-        // Add slight delay before revealing sticker
-        setTimeout(() => {
-          reveal('stiker2');
-          
-          // Start typing animation after sticker is visible
-          setTimeout(() => {
-            const typingElement = document.getElementById('typing-text');
-            typeText(typingElement, messageText, 24, () => {
-              // Animation complete - add final cursor blink
-              const cursor = document.createElement('span');
-              cursor.className = 'cursor';
-              typingElement.appendChild(cursor);
-            });
-          }, 500);
-        }, 300);
-      }, 3000);
+
+    /* ==========================================
+       SCREEN TRANSITION
+    =========================================== */
+
+    function changeScreen(html) {
+
+      if (typingTimer) {
+        clearTimeout(typingTimer);
+      }
+
+      screen.classList.remove("screen");
+
+      void screen.offsetWidth;
+
+      screen.classList.add("screen");
+
+      screen.innerHTML = html;
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+
+    /* ==========================================
+       BUTTON HELPER
+    =========================================== */
+
+    function nextButton(text, step) {
+
+      return `
+        <button
+          type="button"
+          class="button primary"
+          data-next="${step}">
+          ${text}
+        </button>
+      `;
+
+    }
+
+
+    /* ==========================================
+       STORY SCREENS
+    =========================================== */
+
+    function renderStory() {
+
+      /* ------------------------------------------
+         SCREEN 0
+      ------------------------------------------ */
+
+      if (currentStep === 0) {
+
+        changeScreen(`
+
+          <div class="eyebrow">
+            a tiny digital note
+          </div>
+
+          <div class="big-emoji">
+            🥺
+          </div>
+
+          <h1>
+            Shubhi…
+            <br>
+            I owe you an apology.
+          </h1>
+
+          <p class="subtitle">
+            I could have just sent you a text.
+            <br>
+            But where’s the fun in that? 😭
+            <br><br>
+            So… I made you a tiny something.
+          </p>
+
+          <button
+            type="button"
+            class="heart-button"
+            data-next="1"
+            aria-label="Open apology">
+            ❤️‍🩹
+          </button>
+
+          <div class="tap-text">
+            tap the heart, please 👉🏻👈🏻
+          </div>
+
+        `);
+
+        return;
+      }
+
+
+      /* ------------------------------------------
+         SCREEN 1
+      ------------------------------------------ */
+
+      if (currentStep === 1) {
+
+        changeScreen(`
+
+          ${progressDots()}
+
+          <div class="eyebrow">
+            four days ago
+          </div>
+
+          <div class="big-emoji">
+            👀
+          </div>
+
+          <h2>
+            Then there was…
+            <br>
+            Slayer.
+          </h2>
+
+          <div class="card">
+
+            <p>
+              We met on Telegram.
+              You were hiding behind the name
+              <strong>“Slayer”</strong>,
+              pretending to be a boy because,
+              honestly, dealing with random DMs is exhausting. 😭
+            </p>
+
+            <p class="quote">
+              And somehow, despite the whole
+              secret-agent situation…
+              we actually started talking.
+            </p>
+
+            <p>
+              Deep talks.
+              Random talks.
+              Stupid talks.
+              The kind where four days somehow
+              starts feeling longer than four days.
+            </p>
+
+          </div>
+
+          <div class="actions">
+
+            ${nextButton(
+              "okay… continue 🥹",
+              2
+            )}
+
+          </div>
+
+        `);
+
+        return;
+      }
+
+
+      /* ------------------------------------------
+         SCREEN 2
+      ------------------------------------------ */
+
+      if (currentStep === 2) {
+
+        changeScreen(`
+
+          ${progressDots()}
+
+          <div class="eyebrow">
+            plot twist
+          </div>
+
+          <div class="big-emoji">
+            🕵🏻‍♀️
+          </div>
+
+          <h2>
+            And then I caught you.
+          </h2>
+
+          <div class="card">
+
+            <p>
+              Not because you told me.
+            </p>
+
+            <p>
+              Not because “Slayer” slipped up.
+            </p>
+
+            <p>
+              It was the emojis. 😭
+            </p>
+
+            <p>
+              Somehow I was like…
+              <strong>
+                “hmm. This is definitely a girl.”
+              </strong>
+              😂
+            </p>
+
+            <p>
+              And eventually I got to know
+              the person behind Slayer was actually
+              <strong>Shubhi</strong>. 🤍
+            </p>
+
+          </div>
+
+          <div class="actions">
+
+            ${nextButton(
+              "and then… disaster happened 💀",
+              3
+            )}
+
+          </div>
+
+        `);
+
+        return;
+      }
+
+
+      /* ------------------------------------------
+         SCREEN 3
+      ------------------------------------------ */
+
+      if (currentStep === 3) {
+
+        changeScreen(`
+
+          ${progressDots()}
+
+          <div class="eyebrow">
+            the incident
+          </div>
+
+          <div class="big-emoji">
+            💀
+          </div>
+
+          <h2>
+            My brain.exe
+            <br>
+            stopped working.
+          </h2>
+
+          <div class="card">
+
+            <p>
+              Telegram was sitting in a tiny
+              floating window.
+              I was talking to my cousin on Instagram.
+              A show was playing in the background.
+            </p>
+
+            <p>
+              Then a bunch of messages appeared
+              from the owner.
+            </p>
+
+            <p>
+              Someone asked whether the meeting
+              was today or tomorrow.
+            </p>
+
+            <p>
+              You replied that it was clearly
+              written that it was today.
+            </p>
+
+            <p class="quote">
+              And my genius brain looked at the
+              tiny window and somehow thought
+              <strong>you were Bipin.</strong> 😭
+            </p>
+
+            <p>
+              So I casually dropped:
+            </p>
+
+            <p class="quote">
+              “easy dude… late night 10:40
+              expect nahi karte log…”
+            </p>
+
+            <p>
+              …and immediately unlocked a
+              brand-new achievement:
+              <strong>
+                “why did I do that?” 🫠
+              </strong>
+            </p>
+
+          </div>
+
+          <div class="actions">
+
+            ${nextButton(
+              "okay, now the actual apology 🤍",
+              4
+            )}
+
+          </div>
+
+        `);
+
+        return;
+      }
+
+
+      /* ------------------------------------------
+         SCREEN 4
+      ------------------------------------------ */
+
+      if (currentStep === 4) {
+
+        changeScreen(`
+
+          ${progressDots()}
+
+          <div class="eyebrow">
+            no excuses. just sorry.
+          </div>
+
+          <div class="big-emoji">
+            🥺🤍
+          </div>
+
+          <h2>
+            I’m really,
+            <br>
+            really sorry.
+          </h2>
+
+          <div class="card">
+
+            <div
+              id="typing"
+              class="typing">
+            </div>
+
+          </div>
+
+        `);
+
+        startTyping();
+
+        return;
+      }
+
+
+      /* ------------------------------------------
+         SCREEN 5
+      ------------------------------------------ */
+
+      if (currentStep === 5) {
+
+        changeScreen(`
+
+          ${progressDots()}
+
+          <div class="final-heart">
+            🫶🏻
+          </div>
+
+          <div class="eyebrow">
+            one last thing
+          </div>
+
+          <h2>
+            Can we not let
+            <br>
+            one stupid message ruin this?
+          </h2>
+
+          <p class="subtitle">
+
+            I genuinely like talking to you, Shubhi.
+
+            <br><br>
+
+            And I’d rather keep discovering
+            the person behind “Slayer”
+            than have my stupid floating-window
+            brain ruin it. 😭
+
+          </p>
+
+          <div class="card">
+
+            <strong>
+              So… friends? 🥺👉🏻👈🏻
+            </strong>
+
+            <div class="signature">
+              — the idiot who will read the
+              name before replying next time 🤝🏻
+            </div>
+
+          </div>
+
+          <div class="actions">
+
+            ${nextButton(
+              "YES, YOU IDIOT 😂❤️",
+              0
+            )}
+
+          </div>
+
+        `);
+
+      }
+
+    }
+
+
+    /* ==========================================
+       TYPING ANIMATION
+    =========================================== */
+
+    function startTyping() {
+
+      const element = document.getElementById("typing");
+
+      if (!element) {
+        return;
+      }
+
+      let index = 0;
+
+      function type() {
+
+        if (index < apology.length) {
+
+          element.innerHTML =
+            apology.substring(0, index + 1)
+            +
+            `<span class="cursor"></span>`;
+
+          index++;
+
+          typingTimer =
+            setTimeout(type, 16);
+
+        } else {
+
+          element.innerHTML =
+            apology
+            +
+            `<span class="cursor"></span>`;
+
+        }
+
+      }
+
+      type();
+
+    }
+
+
+    /* ==========================================
+       GLOBAL STORY CLICK HANDLER
+       
+       IMPORTANT:
+       We use event delegation here so the buttons
+       continue working even after screens change.
+    =========================================== */
+
+    screen.addEventListener("click", function(event) {
+
+      const button =
+        event.target.closest("[data-next]");
+
+      if (!button) {
+        return;
+      }
+
+      const nextStep =
+        Number(button.dataset.next);
+
+      if (
+        Number.isNaN(nextStep) ||
+        nextStep < 0 ||
+        nextStep > 5
+      ) {
+        return;
+      }
+
+      currentStep = nextStep;
+
+      renderStory();
+
     });
+
+
+    /* ==========================================
+       BACKGROUND HEARTS
+    =========================================== */
+
+    function createBackgroundHeart() {
+
+      const heart =
+        document.createElement("div");
+
+      heart.className =
+        "background-heart";
+
+      const hearts = [
+        "♡",
+        "♥",
+        "♡",
+        "💗",
+        "🤍"
+      ];
+
+      heart.textContent =
+        hearts[
+          Math.floor(
+            Math.random() * hearts.length
+          )
+        ];
+
+      heart.style.left =
+        Math.random() * 100 + "vw";
+
+      heart.style.bottom =
+        "-30px";
+
+      heart.style.fontSize =
+        (12 + Math.random() * 16) + "px";
+
+      heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 11000);
+
+    }
+
+
+    /* ==========================================
+       KEYBOARD SUPPORT
+    =========================================== */
+
+    document.addEventListener("keydown", function(event) {
+
+      /*
+        Enter / Space on the landing page
+        also opens the story.
+      */
+
+      if (
+        currentStep === 0 &&
+        (
+          event.key === "Enter" ||
+          event.key === " "
+        )
+      ) {
+
+        event.preventDefault();
+
+        currentStep = 1;
+
+        renderStory();
+
+      }
+
+    });
+
+
+    /* ==========================================
+       START EVERYTHING
+    =========================================== */
+
+    renderStory();
+
+
+    setInterval(
+      createBackgroundHeart,
+      700
+    );
+
   </script>
-
-  <script>
-  const container = document.getElementById('rising-hearts');
-  const colors = ['%23ff6699','%23ff3366','%23ff99cc']; // you can add more hex colors
-
-  function spawnHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('r-heart');
-    // random horizontal start between 0–100%
-    heart.style.left = Math.random() * 100 + 'vw';
-    // random tint
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    heart.style.backgroundImage = heart.style.backgroundImage.replace(/fill="%23[0-9A-Fa-f]+"/, `fill="${color}"`);
-    // random animation duration
-    const duration = 3 + Math.random() * 2; // 3–5s
-    heart.style.animationDuration = `${duration}s, ${2 + Math.random()}s`;
-    container.appendChild(heart);
-
-    // remove after animation
-    setTimeout(() => heart.remove(), duration * 1000);
-  }
-
-
-    // Tiny sparkles for a softer, more magical feel.
-    function spawnSparkle() {
-      if (document.querySelectorAll('.sparkle').length > 22) return;
-      const s = document.createElement('div');
-      s.className = 'sparkle';
-      s.style.left = (Math.random() * 100) + 'vw';
-      s.style.top = (55 + Math.random() * 45) + 'vh';
-      s.style.animationDelay = (Math.random() * .8) + 's';
-      document.body.appendChild(s);
-      setTimeout(() => s.remove(), 4200);
-    }
-    setInterval(spawnSparkle, 420);
-
-  // spawn many hearts continuously
-  setInterval(spawnHeart, 300);
-</script>
 
 </body>
 </html>
