@@ -12,9 +12,13 @@
     html, body { width:100%; height:100%; overflow:hidden; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      background:
+      radial-gradient(circle at 20% 15%, rgba(255, 182, 213, .18), transparent 28%),
+      radial-gradient(circle at 85% 80%, rgba(188, 164, 255, .16), transparent 30%),
+      linear-gradient(135deg, #120f20, #21152e 48%, #10182d);
       color: #fff;
-      text-shadow: 0 2px 2px rgba(0,0,0,.5);
+      text-shadow: 0 2px 8px rgba(0,0,0,.45);
+      -webkit-font-smoothing: antialiased;
       position: relative;
       overflow: hidden;
     }
@@ -43,7 +47,10 @@
     .overlay {
       position: fixed; 
       inset:0;
-      background: rgba(0,0,0,0.9); 
+      background:
+      radial-gradient(circle at center, rgba(82, 42, 91, .28), transparent 45%),
+      rgba(7, 5, 14, .94);
+      backdrop-filter: blur(14px); 
       z-index:100;
       display:flex; 
       flex-direction:column;
@@ -56,8 +63,10 @@
       font-size: 1.5rem; 
       text-align:center; 
       margin-bottom:30px;
-      color: #ffccf9;
+      color: #ffe3f2;
+      letter-spacing: .2px;
       animation: pulseText 2s infinite;
+      text-shadow: 0 0 22px rgba(255, 151, 201, .25);
     }
     
     @keyframes pulseText {
@@ -72,7 +81,7 @@
     }
     
     .lovein {
-      background: radial-gradient(circle, #ab2096, #3a0c15);
+      background: radial-gradient(circle at 35% 30%, #ff91c3, #b82f78 48%, #4b1638);
       color:#fff;
       width:80px; 
       height:80px; 
@@ -83,8 +92,10 @@
       align-items:center;
       cursor:pointer; 
       animation: pulse 1.5s infinite, float 3s ease-in-out infinite;
-      box-shadow: 0 0 20px rgba(241, 2, 198, 0.7),
-                  0 0 40px rgba(59, 2, 16, 0.5);
+      box-shadow:
+        0 0 24px rgba(255, 117, 184, .55),
+        0 0 70px rgba(255, 76, 160, .22),
+        inset 0 0 18px rgba(255,255,255,.12);
       border: 2px solid rgba(255, 255, 255, 0.5);
       transition: transform 0.3s ease;
     }
@@ -135,7 +146,10 @@
       transform:scale(0); 
       opacity:0;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border: 3px solid rgba(255, 255, 255, 0.7);
+      border: 3px solid rgba(255, 255, 255, 0.78);
+      box-shadow:
+        0 14px 35px rgba(0,0,0,.32),
+        0 0 28px rgba(255, 147, 197, .18);
       animation: float 4s ease-in-out infinite;
     }
     
@@ -160,15 +174,20 @@
       transform:translateY(30px); 
       opacity:0;
       margin:0 40px;
-      font-size:1.6rem;
-      line-height:1.5;
+      font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+      line-height:1.65;
+      font-weight: 500;
+      letter-spacing: .1px;
       max-width: 800px;
       padding: 20px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.055));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow:
+        0 18px 55px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.13);
+      border: 1px solid rgba(255, 255, 255, 0.14);
     }
     
     h1.scale1, p.scale1 {
@@ -248,6 +267,57 @@
       50% { opacity: 0; }
     }
     
+
+    .tiny-label {
+      margin-bottom: 14px;
+      padding: 7px 13px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      color: rgba(255,225,239,.82);
+      font-size: .78rem;
+      letter-spacing: 1.2px;
+      text-transform: lowercase;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    }
+
+    .swiper-pagination {
+      bottom: 18px !important;
+    }
+
+    .swiper-pagination-bullet {
+      transition: all .35s ease;
+    }
+
+    .swiper-pagination-bullet-active {
+      width: 28px;
+      border-radius: 999px;
+    }
+
+    #scroll-container {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 130, 181, .55) transparent;
+    }
+
+    #typing-text {
+      padding: 4px 2px 22px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .cursor {
+      border-radius: 3px;
+      box-shadow: 0 0 10px rgba(255, 76, 160, .65);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     /* Responsive design */
     @media (max-width: 768px) {
       h1, p {
@@ -344,10 +414,11 @@ c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>\
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
+        <div class="tiny-label">a little note for you ♡</div>
         <div class="stiker" id="stiker1">
           <img src="https://i.pinimg.com/originals/cc/5e/2b/cc5e2bb13bf57e4f0fbb0db6ca45cb96.gif" alt="Cute Sticker" width="120" height="120"/>
         </div>
-        <h1 id="teks1"> I’m Really Sorry yaar I Need to Tell You Something... 💖</h1>
+        <h1 id="teks1">I’m Really Sorry, yaar 🥺💗<br><span style="font-size:.72em;opacity:.82;font-weight:400;">I need to tell you something...</span></h1>
       </div>
       <div class="swiper-slide">
         <div class="stiker" id="stiker2">
@@ -419,14 +490,14 @@ c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>\
 
 I swear I didn’t mean that message for you at all. Telegram was sitting in that tiny floating window while I was talking to my cousin on Instagram, and with the show running in the background, I just glanced at the messages and somehow my brain decided that those messages were from Bipin 😭
 
-And then I casually replied with my “easy dude” wala tone without even realising that **you** had written it. 🫠
+And then I casually replied with my “easy dude” wala tone without even realising that you had written it. 🫠
 The moment you asked me “ye kya tha group pe?” I was like… oh no. I’ve messed up. 😭
 
 Please don’t think for even a second that I was trying to be disrespectful to you or talk to you in some weird tone. I’d never intentionally do that, especially after all the conversations we’ve had these past few days. 🥺
 
 And honestly, I feel even worse because I know you were already being yourself with me and trusting me enough to let me know the real Shubhi behind “Slayer” 😭. 
 
-So yes… officially, sincerely, wholeheartedly **SORRY**. 🥹🤍
+So yes… officially, sincerely, wholeheartedly SORRY. 🥹🤍
 My brain was buffering, my Telegram was tiny, and my timing was absolutely terrible. 😭
 
 Please forgive this idiot? 🥺
@@ -494,7 +565,7 @@ I’m sorry, Shubhi. Really. 🤍
           // Start typing animation after sticker is visible
           setTimeout(() => {
             const typingElement = document.getElementById('typing-text');
-            typeText(typingElement, messageText, 30, () => {
+            typeText(typingElement, messageText, 24, () => {
               // Animation complete - add final cursor blink
               const cursor = document.createElement('span');
               cursor.className = 'cursor';
@@ -526,6 +597,20 @@ I’m sorry, Shubhi. Really. 🤍
     // remove after animation
     setTimeout(() => heart.remove(), duration * 1000);
   }
+
+
+    // Tiny sparkles for a softer, more magical feel.
+    function spawnSparkle() {
+      if (document.querySelectorAll('.sparkle').length > 22) return;
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = (Math.random() * 100) + 'vw';
+      s.style.top = (55 + Math.random() * 45) + 'vh';
+      s.style.animationDelay = (Math.random() * .8) + 's';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 4200);
+    }
+    setInterval(spawnSparkle, 420);
 
   // spawn many hearts continuously
   setInterval(spawnHeart, 300);
